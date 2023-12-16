@@ -1,8 +1,9 @@
 {
     // symbols used as brackets
     "brackets": [
+        ["IS", "END"],
         ["BEGIN", "END"],
-        ["THEN", "END"],
-        ["DO", "END"]
-    ],
+        ["THEN", "END IF"],
+        ["DO", "END WHILE"]
+    ]
 }

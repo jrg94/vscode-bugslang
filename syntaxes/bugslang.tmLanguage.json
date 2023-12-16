@@ -3,6 +3,9 @@
 	"name": "BugsLang",
 	"patterns": [
 		{
+			"include": "#programs"
+		},
+		{
 			"include": "#functions"
 		},
 		{
@@ -13,13 +16,26 @@
 		}
 	],
 	"repository": {
+		"programs": {
+			"patterns": [{
+				"match": "\\b(PROGRAM)\\s+(\\w+)\\s+(IS)",
+				"captures": {
+					"1": {"name": "keyword.other.bugslang"},
+					"2": {"name": "entity.name.type"},
+					"3": {"name": "keyword.other.bugslang"}
+				}, 
+				"patterns": [
+					{"include": "#keywords"}
+				]
+			}]
+		},
 		"functions": {
 			"patterns": [{
 				"match": "\\b(INSTRUCTION)\\s+(\\w+)\\s+(IS)",
 				"captures": {
-					"1": {"name": "keyword.control.bugslang"},
+					"1": {"name": "keyword.other.bugslang"},
 					"2": {"name": "entity.name.function.bugslang"},
-					"3": {"name": "keyword.control.bugslang"}
+					"3": {"name": "keyword.other.bugslang"}
 				},
 				"patterns": [
 					{"include": "#keywords"}
@@ -34,10 +50,16 @@
 			}]
 		},
 		"keywords": {
-			"patterns": [{
-				"name": "keyword.control.bugslang",
-				"match": "\\b(BEGIN|DO|ELSE|END|IF|INSTRUCTION|IS|PROGRAM|THEN|WHILE)\\b"
-			}]
+			"patterns": [
+				{
+					"name": "keyword.control.bugslang",
+					"match": "\\b(BEGIN|DO|ELSE|END|IF|THEN|WHILE)\\b"
+				},
+				{
+					"name": "keyword.other.bugslang",
+					"match": "\\b(INSTRUCTION|PROGRAM|IS)\\b"
+				}
+		]
 		}
 
 	},
