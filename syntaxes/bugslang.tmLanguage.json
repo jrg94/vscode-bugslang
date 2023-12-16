@@ -6,26 +6,21 @@
 			"include": "#keywords"
 		},
 		{
-			"include": "#strings"
+			"include": "#constants"
 		}
 	],
 	"repository": {
 		"keywords": {
 			"patterns": [{
 				"name": "keyword.control.bugslang",
-				"match": "\\b(if|while|for|return)\\b"
+				"match": "\\b(BEGIN|DO|ELSE|END|IF|INSTRUCTION|IS|PROGRAM|THEN|WHILE)\\b"
 			}]
 		},
-		"strings": {
-			"name": "string.quoted.double.bugslang",
-			"begin": "\"",
-			"end": "\"",
-			"patterns": [
-				{
-					"name": "constant.character.escape.bugslang",
-					"match": "\\\\."
-				}
-			]
+		"constants": {
+			"patterns": [{
+				"name": "constant.language.bugslang",
+				"match": "\\b(next-is-empty|next-is-not-empty|next-is-wall|next-is-not-wall|next-is-enemy|next-is-not-enemy|next-is-friend|next-is-not-friend|random|true)\\b"
+			}]
 		}
 	},
 	"scopeName": "source.bugslang"
