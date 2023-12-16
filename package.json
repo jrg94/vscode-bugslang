@@ -1,0 +1,25 @@
+{
+  "name": "bugslang",
+  "displayName": "BugsLang",
+  "description": "A syntax highlighter for BugsLang",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "bugslang",
+      "aliases": ["BugsLang", "bugslang"],
+      "extensions": [".bl"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "bugslang",
+      "scopeName": "source.bugslang",
+      "path": "./syntaxes/bugslang.tmLanguage.json"
+    }]
+  }
+}
