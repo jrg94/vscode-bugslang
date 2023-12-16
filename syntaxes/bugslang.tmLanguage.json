@@ -3,25 +3,43 @@
 	"name": "BugsLang",
 	"patterns": [
 		{
+			"include": "#functions"
+		},
+		{
 			"include": "#keywords"
 		},
 		{
-			"include": "#constants"
+			"include": "#conditions"
 		}
 	],
 	"repository": {
+		"functions": {
+			"patterns": [{
+				"match": "\\b(INSTRUCTION)\\s+(\\w+)\\s+(IS)",
+				"captures": {
+					"1": {"name": "keyword.control.bugslang"},
+					"2": {"name": "entity.name.function.bugslang"},
+					"3": {"name": "keyword.control.bugslang"}
+				},
+				"patterns": [
+					{"include": "#keywords"}
+				]
+			}]
+			
+		},
+		"conditions": {
+			"patterns": [{
+				"name": "constant.language.bugslang",
+				"match": "\\b(next-is-empty|next-is-not-empty|next-is-wall|next-is-not-wall|next-is-enemy|next-is-not-enemy|next-is-friend|next-is-not-friend|random|true)\\b"
+			}]
+		},
 		"keywords": {
 			"patterns": [{
 				"name": "keyword.control.bugslang",
 				"match": "\\b(BEGIN|DO|ELSE|END|IF|INSTRUCTION|IS|PROGRAM|THEN|WHILE)\\b"
 			}]
-		},
-		"constants": {
-			"patterns": [{
-				"name": "constant.language.bugslang",
-				"match": "\\b(next-is-empty|next-is-not-empty|next-is-wall|next-is-not-wall|next-is-enemy|next-is-not-enemy|next-is-friend|next-is-not-friend|random|true)\\b"
-			}]
 		}
+
 	},
 	"scopeName": "source.bugslang"
 }
