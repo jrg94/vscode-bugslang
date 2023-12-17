@@ -63,7 +63,8 @@
 				"patterns": [
 					{"include": "#keywords"},
 					{"include": "#conditions"},
-					{"include": "#builtins"}
+					{"include": "#builtins"},
+					{"include": "#calls"}
 				]
 			}]
 		},
@@ -90,6 +91,14 @@
 				{
 					"name": "support.function.bugslang",
 					"match": "\\b(move|turnleft|turnright|infect|skip)\\b"
+				}
+			]
+		},
+		"calls": {
+			"patterns": [
+				{
+					"name": "entity.name.function",
+					"match": "\\w+"
 				}
 			]
 		}
