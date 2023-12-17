@@ -3,50 +3,57 @@
 	"name": "BugsLang",
 	"patterns": [
 		{
-			"include": "#builtins"
-		},
-		{
-			"include": "#programs"
-		},
-		{
-			"include": "#functions"
-		},
-		{
-			"include": "#keywords"
-		},
-		{
-			"include": "#conditions"
+			"include": "#program"
 		}
 	],
 	"repository": {
-		"programs": {
+		"program": {
 			"patterns": [{
-				"match": "(?m)(PROGRAM)\\s+(\\w+)\\s+(IS)",
-				"captures": {
+				"begin": "(PROGRAM)\\s+(\\w+)\\s+(IS)",
+				"end": "^(END)\\s+(\\2)",
+				"beginCaptures": {
 					"1": {"name": "keyword.other.bugslang"},
 					"2": {"name": "entity.name.type.bugslang"},
-					"3": {"name": "keyword.other.bugslang"},
-					"4": {"name": "keyword.control.bugslang"},
-					"5": {"name": "entity.name.type.bugslang"}
-				}, 
+					"3": {"name": "keyword.other.bugslang"}
+
+				},
+				"endCaptures": {
+					"1": {"name": "keyword.other.bugslang"},
+					"2": {"name": "entity.name.type.bugslang"}
+				},
+				"name": "meta.program.bugslang",
 				"patterns": [
-					{"include": "#keywords"}
+					{"include": "#functions"}
 				]
 			}]
 		},
 		"functions": {
 			"patterns": [{
-				"match": "\\b(INSTRUCTION)\\s+(\\w+)\\s+(IS)",
-				"captures": {
-					"1": {"name": "keyword.other.bugslang"},
+				"begin": "(INSTRUCTION)\\s+(\\w+)\\s+(IS)",
+				"end": "(END)\\s+(\\2)",
+				"beginCaptures": {
+					"1": {"name": "keyword.control.bugslang"},
 					"2": {"name": "entity.name.function.bugslang"},
-					"3": {"name": "keyword.other.bugslang"}
+					"3": {"name": "keyword.control.bugslang"}
 				},
+				"endCaptures": {
+					"1": {"name": "keyword.control.bugslang"},
+					"2": {"name": "entity.name.function.bugslang"}
+				},
+				"name": "meta.instruction.bugslang",
 				"patterns": [
-					{"include": "#keywords"}
+					{"include": "#keywords"},
+					{"include": "#conditions"},
+					{"include": "#builtins"}
 				]
 			}]
-			
+		},
+		"body": {
+			"patterns": [{
+				"begin": "BEGIN",
+				"end": "^END",
+				"contentName": "comment.block"
+			}]
 		},
 		"conditions": {
 			"patterns": [{
@@ -58,11 +65,11 @@
 			"patterns": [
 				{
 					"name": "keyword.control.bugslang",
-					"match": "\\b(BEGIN|DO|ELSE|END|IF|THEN|WHILE)\\b"
+					"match": "\\b(BEGIN|DO|ELSE|END|IF|THEN|WHILE|INSTRUCTION)\\b"
 				},
 				{
 					"name": "keyword.other.bugslang",
-					"match": "\\b(INSTRUCTION|PROGRAM|IS)\\b"
+					"match": "\\b(PROGRAM|IS)\\b"
 				}
 			]
 		},
