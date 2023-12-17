@@ -26,7 +26,11 @@
 				"name": "meta.program.bugslang",
 				"patterns": [
 					{"include": "#context"},
-					{"include": "#body"}
+					{"include": "#body"},
+					{
+						"match": "BEGIN",
+						"name": "keyword.other.bugslang"
+					}
 				]
 			}]
 		},
@@ -55,7 +59,12 @@
 			"patterns": [{
 				"begin": "(?<=BEGIN)[\\s\\S]+",
 				"end": "(?=^END)",
-				"name": "comment.block"
+				"name": "mata.body.bugslang",
+				"patterns": [
+					{"include": "#keywords"},
+					{"include": "#conditions"},
+					{"include": "#builtins"}
+				]
 			}]
 		},
 		"conditions": {
