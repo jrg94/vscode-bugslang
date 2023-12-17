@@ -2,31 +2,107 @@
 	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
 	"name": "BugsLang",
 	"patterns": [
+
 		{
-			"include": "#keywords"
-		},
-		{
-			"include": "#strings"
+			"include": "#program"
 		}
+		
 	],
 	"repository": {
-		"keywords": {
+		"program": {
 			"patterns": [{
-				"name": "keyword.control.bugslang",
-				"match": "\\b(if|while|for|return)\\b"
+				"begin": "(PROGRAM)\\s+(\\w+)\\s+(IS)",
+				"end": "^(END)\\s+(\\2)",
+				"beginCaptures": {
+					"1": {"name": "keyword.other.bugslang"},
+					"2": {"name": "entity.name.type.bugslang"},
+					"3": {"name": "keyword.other.bugslang"}
+
+				},
+				"endCaptures": {
+					"1": {"name": "keyword.other.bugslang"},
+					"2": {"name": "entity.name.type.bugslang"}
+				},
+				"name": "meta.program.bugslang",
+				"patterns": [
+					{"include": "#context"},
+					{"include": "#body"},
+					{
+						"match": "BEGIN",
+						"name": "keyword.other.bugslang"
+					}
+				]
 			}]
 		},
-		"strings": {
-			"name": "string.quoted.double.bugslang",
-			"begin": "\"",
-			"end": "\"",
+		"context": {
+			"patterns": [{
+				"begin": "(INSTRUCTION)\\s+(\\w+)\\s+(IS)",
+				"end": "(END)\\s+(\\2)",
+				"beginCaptures": {
+					"1": {"name": "keyword.control.bugslang"},
+					"2": {"name": "entity.name.function.bugslang"},
+					"3": {"name": "keyword.control.bugslang"}
+				},
+				"endCaptures": {
+					"1": {"name": "keyword.control.bugslang"},
+					"2": {"name": "entity.name.function.bugslang"}
+				},
+				"name": "meta.instruction.bugslang",
+				"patterns": [
+					{"include": "#keywords"},
+					{"include": "#conditions"},
+					{"include": "#builtins"}
+				]
+			}]
+		},
+		"body": {
+			"patterns": [{
+				"begin": "(?<=BEGIN)[\\s\\S]+",
+				"end": "(?=^END)",
+				"name": "mata.body.bugslang",
+				"patterns": [
+					{"include": "#keywords"},
+					{"include": "#conditions"},
+					{"include": "#builtins"},
+					{"include": "#calls"}
+				]
+			}]
+		},
+		"conditions": {
+			"patterns": [{
+				"name": "constant.language.bugslang",
+				"match": "\\b(next-is-empty|next-is-not-empty|next-is-wall|next-is-not-wall|next-is-enemy|next-is-not-enemy|next-is-friend|next-is-not-friend|random|true)\\b"
+			}]
+		},
+		"keywords": {
 			"patterns": [
 				{
-					"name": "constant.character.escape.bugslang",
-					"match": "\\\\."
+					"name": "keyword.control.bugslang",
+					"match": "\\b(BEGIN|DO|ELSE|END|IF|THEN|WHILE|INSTRUCTION)\\b"
+				},
+				{
+					"name": "keyword.other.bugslang",
+					"match": "\\b(PROGRAM|IS)\\b"
+				}
+			]
+		},
+		"builtins": {
+			"patterns": [
+				{
+					"name": "support.function.bugslang",
+					"match": "\\b(move|turnleft|turnright|infect|skip)\\b"
+				}
+			]
+		},
+		"calls": {
+			"patterns": [
+				{
+					"name": "entity.name.function",
+					"match": "\\w+"
 				}
 			]
 		}
+
 	},
 	"scopeName": "source.bugslang"
 }
