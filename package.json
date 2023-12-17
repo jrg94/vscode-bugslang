@@ -2,6 +2,7 @@
   "name": "bugslang",
   "displayName": "BugsLang",
   "description": "A syntax highlighter for BugsLang",
+  "publisher": "TheRenegadeCoder",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.85.0"
