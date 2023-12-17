@@ -3,6 +3,9 @@
 	"name": "BugsLang",
 	"patterns": [
 		{
+			"include": "#builtins"
+		},
+		{
 			"include": "#programs"
 		},
 		{
@@ -18,11 +21,13 @@
 	"repository": {
 		"programs": {
 			"patterns": [{
-				"match": "\\b(PROGRAM)\\s+(\\w+)\\s+(IS)",
+				"match": "(?m)(PROGRAM)\\s+(\\w+)\\s+(IS)",
 				"captures": {
 					"1": {"name": "keyword.other.bugslang"},
-					"2": {"name": "entity.name.type"},
-					"3": {"name": "keyword.other.bugslang"}
+					"2": {"name": "entity.name.type.bugslang"},
+					"3": {"name": "keyword.other.bugslang"},
+					"4": {"name": "keyword.control.bugslang"},
+					"5": {"name": "entity.name.type.bugslang"}
 				}, 
 				"patterns": [
 					{"include": "#keywords"}
@@ -59,7 +64,15 @@
 					"name": "keyword.other.bugslang",
 					"match": "\\b(INSTRUCTION|PROGRAM|IS)\\b"
 				}
-		]
+			]
+		},
+		"builtins": {
+			"patterns": [
+				{
+					"name": "support.function.bugslang",
+					"match": "\\b(move|turnleft|turnright|infect|skip)\\b"
+				}
+			]
 		}
 
 	},
